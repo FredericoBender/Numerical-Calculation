@@ -1,6 +1,31 @@
 #Encoding=utf-8
 from math import *
-### function sempre em termos de x ###
+
+#Faz uma leitura dos dados de um TXT e retorna uma matriz de inteiros
+def leituraMatriz(arquivo):
+    matriz=[]
+    with open(arquivo,"r") as arq: #Garante o fechamento do arquivo
+        lista = arq.read()
+        lista=lista.split("\n") #Separa por \n em uma lista
+        cont=0
+        for i in range(len(lista)): 
+            lista[i]=lista[i].lstrip() #Remove espaços a esquerda de cada linha
+            lista[i]=lista[i].rstrip() #Remove espaços a direita de cada linha
+            A=lista[i].isspace() #Verifica se existe alguma linha em branco
+            if (A==False) and (lista[i]!=""): #Se a linha não for em branco passa para próxima etapa
+                matriz.append(lista[i])
+                matriz[cont]=matriz[cont].split(" ") #Separa os itens de cada linha por espaço
+                cont2=0
+                while (cont2<len(matriz[cont])): #Loop para remover os espaços da respectiva linha
+                    if (matriz[cont][cont2]==""):
+                        del matriz[cont][cont2]
+                        cont2-=1
+                    else:
+                        matriz[cont][cont2]=int(matriz[cont][cont2]) #Transforma em inteiro se for um número
+                    cont2+=1 
+                cont+=1
+        return matriz
+
 #Retorna o resultado aproximado da integral definida por Regra de Trapezios
 def trapezios(a,b,function,nPontos=100001,precisao=3): #Integração pela soma de vários trapézios
     def geraPontos(a,b,h,function): #Gera os pontos Y baseado no passo
@@ -91,7 +116,7 @@ def mil(function,precisaoNoResultado=3):
         if(cont>10000):
             break
     print("Não converge")
-    
+   
 def gaussJordan():
     pass
 

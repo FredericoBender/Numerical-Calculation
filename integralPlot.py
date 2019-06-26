@@ -21,15 +21,15 @@ def geraListaPontos(a,b,function,nPontos):
     return pontosX,pontosY
 
 a = 0 #Limite inferior de integração
-b = 6 #Limite superior de integração
-nPontos = 101 #Número de pontos da integração numérica
+b = 12 #Limite superior de integração
+nPontos = 10001 #Número de pontos da integração numérica
+function="-0.00108039*(x**6) + 0.0405309935*(x**5)-0.57956310299*(x**4)+3.90581289*(x**3)-12.301946476*(x**2)+15.058704795*x" 
 #function="(x**2)-sin(x)" #Minha Função
 #function="abs(x**0.5)"
-#function="-0.00108039*(x**6) + 0.0405309935*(x**5)-0.57956310299*(x**4)+3.90581289*(x**3)-12.301946476*(x**2)+15.058704795*x" 
 #function="e**(-0.1*x)+(5*sin(x)+cos(0.1*x))"
-function="e**0.1*x+sin(8*x)+cos(x)-1"
+#function="sin(x)"
 
-r = simpson(a,b,function,nPontos) #Pode ou não passar o 3 e 4 (nPontos,precisao exibida no resultado)e ver o numero de casas decimais desejado
+r = simpson(a,b,function,nPontos) #Pode ou não passar o 4 e 5 (nPontos,precisao exibida no resultado)e ver o numero de casas decimais desejado
 trapezios(a,b,function,nPontos)
 
 xEstimado, yEstimado = np.array(geraListaPontos(a,b,function,nPontos)) #Tem que ser np.array para funcionar!
@@ -41,7 +41,9 @@ graph = fig.add_subplot()
 graph.plot(xReal, yReal , [a,b], [0,0], [b,b], [0,yEstimado[-1]], [a,a], [0,yEstimado[0]], "-", color="sienna")
 graph.plot(xReal, yReal , "-", label="fx real", color="black")
 graph.plot(xEstimado,yEstimado, ":",label="fx estimada",color="dimgrey")
-
+if (nPontos<=1001):
+    for i in range(len(xEstimado)):
+        graph.plot([xEstimado[i],xEstimado[i]], [0,yEstimado[i]] , ":", color="dimgrey")
 graph.fill_between(xEstimado,0,yEstimado,where=yEstimado>=0,color="lawngreen",interpolate=True) #Pinta região do gráfico
 graph.fill_between(xEstimado,0,yEstimado,where=yEstimado<0,color="r",interpolate=True)
 
