@@ -21,10 +21,10 @@ def geraListaPontos(a,b,function,nPontos):
     return pontosX,pontosY
 
 a = 0 #Limite inferior de integração
-b = 12 #Limite superior de integração
-nPontos = 10001 #Número de pontos da integração numérica
-function="-0.00108039*(x**6) + 0.0405309935*(x**5)-0.57956310299*(x**4)+3.90581289*(x**3)-12.301946476*(x**2)+15.058704795*x" 
-#function="(x**2)-sin(x)" #Minha Função
+b = 1 #Limite superior de integração
+nPontos = 11 #Número de pontos da integração numérica
+function="(x**2)-sin(x)" #Minha Função
+#function="-0.00108039*(x**6) + 0.0405309935*(x**5)-0.57956310299*(x**4)+3.90581289*(x**3)-12.301946476*(x**2)+15.058704795*x" 
 #function="abs(x**0.5)"
 #function="e**(-0.1*x)+(5*sin(x)+cos(0.1*x))"
 #function="sin(x)"
@@ -40,7 +40,7 @@ fig = plt.figure()
 graph = fig.add_subplot()
 graph.plot(xReal, yReal , [a,b], [0,0], [b,b], [0,yEstimado[-1]], [a,a], [0,yEstimado[0]], "-", color="sienna")
 graph.plot(xReal, yReal , "-", label="fx real", color="black")
-graph.plot(xEstimado,yEstimado, ":",label="fx estimada",color="dimgrey")
+graph.plot(xEstimado,yEstimado, ":",label="fx estimada por trapézios",color="dimgrey")
 if (nPontos<=1001):
     for i in range(len(xEstimado)):
         graph.plot([xEstimado[i],xEstimado[i]], [0,yEstimado[i]] , ":", color="dimgrey")
