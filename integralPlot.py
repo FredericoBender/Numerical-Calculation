@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
+from numpy import array
 from benderMathLib import simpson,trapezios
 from math import *
 
@@ -21,19 +21,19 @@ def geraListaPontos(a,b,function,nPontos):
     return pontosX,pontosY
 
 a = 0 #Limite inferior de integração
-b = 1 #Limite superior de integração
-nPontos = 11 #Número de pontos da integração numérica
-function="(x**2)-sin(x)" #Minha Função
+b = 7 #Limite superior de integração
+nPontos = 1001 #Número de pontos da integração numérica
+#function="sin(x)" #Minha Função
 #function="-0.00108039*(x**6) + 0.0405309935*(x**5)-0.57956310299*(x**4)+3.90581289*(x**3)-12.301946476*(x**2)+15.058704795*x" 
 #function="abs(x**0.5)"
 #function="e**(-0.1*x)+(5*sin(x)+cos(0.1*x))"
-#function="sin(x)"
+#function="3*(x**2)-1"
 
 r = simpson(a,b,function,nPontos) #Pode ou não passar o 4 e 5 (nPontos,precisao exibida no resultado)e ver o numero de casas decimais desejado
 trapezios(a,b,function,nPontos)
 
-xEstimado, yEstimado = np.array(geraListaPontos(a,b,function,nPontos)) #Tem que ser np.array para funcionar!
-xReal, yReal = np.array(geraListaPontos(a-((b-a)/10),b+((b-a)/10),function,150000))
+xEstimado, yEstimado = array(geraListaPontos(a,b,function,nPontos)) #Tem que ser np.array para funcionar!
+xReal, yReal = array(geraListaPontos(a-((b-a)/10),b+((b-a)/10),function,110000))
 
 #Parte gráfica
 fig = plt.figure()
